@@ -3,14 +3,24 @@ class SinglePic {
     status:string;
 }
 
+class DogBreedList{
+    message:string[];
+    status:string;
+}
+
 window.onload = function() {
     let pictureBtn = $("picture-button");
     pictureBtn.onclick = main;
-    
+    getAllDogBreeds();
 }
 
 function main() {
     //console.log("Button was clicked");
+    getDogPics();
+
+}
+
+function getDogPics() {
     let http = new XMLHttpRequest();
     //prepare the request to the server
     //GET request asks the server for data
@@ -24,6 +34,39 @@ function main() {
 
     //Send the request to the server
     http.send();
+}
+
+function getAllDogBreeds(){
+    let http = new XMLHttpRequest();
+    http.open("GET", "https://dog.ceo/api/breeds/list/all");
+    http.onreadystatechange = processDogBreeds;
+    http.send();
+}
+
+function processDogBreeds(){
+    let http = <XMLHttpRequest>this;
+    if(http.readyState == 4 && http.status == 200){
+        let categories:DogBreedList = JSON.parse(http.responseText);
+        console.log(http.responseText);
+        console.log(categories);
+
+        displayDogBreeds(categories);
+    }
+}
+
+function displayDogBreeds(categories:DogBreedList){
+    let categoriesArray = JSON.stringify(categories.message).split("\"");
+    console.log("categories array");
+    console.log(categoriesArray);
+    let displayDiv = $("display-pic");
+
+    let dogBreedList = displayDiv.querySelector("ul");
+
+    for(let i = 1; i < categoriesArray.length; i += 2){
+        let singleDogBreed = document.createElement("li");
+        singleDogBreed.innerText = categoriesArray[i];
+        dogBreedList.appendChild(singleDogBreed);
+    }
 }
 
 function processRequest() {
