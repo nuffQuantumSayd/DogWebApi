@@ -15,6 +15,9 @@ window.onload = function() {
 }
 
 function main() {
+    let pictureBtn = <HTMLButtonElement>$("picture-button");
+    pictureBtn.disabled = true;
+
     //console.log("Button was clicked");
     getDogPics();
 
@@ -89,6 +92,10 @@ function processRequest() {
         console.log(response.message);
         
         displayPicture(response);
+    }
+    if(http.readyState == 4){
+        let pictureBtn = <HTMLButtonElement>$("picture-button");
+        pictureBtn.disabled = false;
     }
     
 }

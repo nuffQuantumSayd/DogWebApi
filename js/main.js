@@ -14,6 +14,8 @@ window.onload = function () {
     getAllDogBreeds();
 };
 function main() {
+    var pictureBtn = $("picture-button");
+    pictureBtn.disabled = true;
     getDogPics();
 }
 function getDogPics() {
@@ -57,6 +59,10 @@ function processRequest() {
         console.log(response.status);
         console.log(response.message);
         displayPicture(response);
+    }
+    if (http.readyState == 4) {
+        var pictureBtn = $("picture-button");
+        pictureBtn.disabled = false;
     }
 }
 function displayPicture(pic) {
