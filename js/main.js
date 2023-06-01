@@ -16,6 +16,7 @@ window.onload = function () {
 function main() {
     var pictureBtn = $("picture-button");
     pictureBtn.disabled = true;
+    pictureBtn.innerText = "Getting Doggo...";
     getDogPics();
 }
 function getDogPics() {
@@ -63,6 +64,7 @@ function processRequest() {
     if (http.readyState == 4) {
         var pictureBtn = $("picture-button");
         pictureBtn.disabled = false;
+        pictureBtn.innerText = "Get Doggo";
     }
 }
 function displayPicture(pic) {

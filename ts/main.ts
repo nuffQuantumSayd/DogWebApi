@@ -17,6 +17,7 @@ window.onload = function() {
 function main() {
     let pictureBtn = <HTMLButtonElement>$("picture-button");
     pictureBtn.disabled = true;
+    pictureBtn.innerText = "Getting Doggo...";
 
     //console.log("Button was clicked");
     getDogPics();
@@ -96,6 +97,7 @@ function processRequest() {
     if(http.readyState == 4){
         let pictureBtn = <HTMLButtonElement>$("picture-button");
         pictureBtn.disabled = false;
+        pictureBtn.innerText = "Get Doggo";
     }
     
 }
